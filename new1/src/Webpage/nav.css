@@ -5,10 +5,17 @@ body {
   margin: 0;
   padding: 0;
 }
+.active{
+  background-color: #3b3b91;
+}
+nav{
+  position: relative;
+} 
+
 .dropdown {
   margin: 0;
   background-color: brown;
-  position: relative;
+  /* position: relative; */
   list-style-type: none;
 }
 .dropdown li {
@@ -21,7 +28,7 @@ body {
   color: white;
 }
 .dropdown li:hover {
-  background-color: slategrey;
+  background-color: #2b3b6d;
   border-radius: 5px;
 }
 .dropdown-content {
@@ -45,7 +52,7 @@ body {
 
 .container {
   /* border: 2px solid red; */
-  min-height: 100vh;
+  min-height: 125vh;
   background-image: url(./VvHazk.webp);
   /* background-color: #ced8ff; */
   background-size: cover;
@@ -163,18 +170,55 @@ label {
   place-Content:center;
   position:relative;
   margin-top: 50px;
-  /* border: 2px solid red;
-  height: 490px;
+  
+   /* border: 2px solid red; */
+  /* height: 490px;
   background-image: url(../assets/ySUE6C.png);
-  background-size: cover; */
+  background-size: cover; */ 
 }
-
-@media screen and(max-width:400px){
-  .gettable{
-    /* font-size: 15px; */
-    width:100%;
-
+#menu-bar{
+  display: none;
+}
+.menu-div .menu-label{
+  font-size: 20px;
+  color: #2b3b6d;
+  cursor: pointer;
+  display: none;
+}
+@media screen and (max-width: 620px) {
+  .get {
+    overflow-x: scroll; 
   }
+
+  .gettable {
+    max-width: 100%; 
+  }
+
+  .form-post {
+    width: 80%; 
+    margin-top: 20px; 
+  }
+
+  .btn-adduser {
+    font-size: 16px; 
+    margin-top: -20px;
+  }
+
+  label {
+    font-size: 14px; 
+  }
+
+  .btn-submit {
+    font-size: 16px; 
+    margin: 10px 0;
+  }
+
 }
+.nav{display: flex;
+align-items: center;}
+
+
+
+
 
 

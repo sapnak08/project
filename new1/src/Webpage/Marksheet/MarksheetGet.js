@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class MarksheetGet extends Component {
   constructor() {
@@ -68,7 +68,7 @@ export default class MarksheetGet extends Component {
                     <td>{item.chemistry}</td>
                     <td>{item.maths}</td>
                     <td>
-                      {/* <button className='btn-edit'><Link to={`/editcollege/${item._id }`} >Edit </Link></button> */}
+                      <button className='btn-edit'><Link to={`/editmarksheet/${item._id }`} >Edit </Link></button>
                       <button className='btn-dlt' onClick={()=>this.handleDelete(item._id)}>Delete</button>
                     </td>
                     </tr> 

@@ -6,7 +6,7 @@ export default class EditMarksheet extends Component {
     super();
     this.state = {
         name: '',
-        studentId: '',
+        studentId: '', 
         rollNo: '',
         physics: '',
         chemistry: '',
@@ -30,10 +30,11 @@ export default class EditMarksheet extends Component {
         this.setState({
             name: response.data.name,
             studentId: response.data.studentId,
+            rollNo: response.data.rollNo,
             physics: response.data.physics,
             chemistry: response.data.chemistry,
             maths: response.data.maths,
-          id: response.data._id,
+            id: response.data._id,
         });
       })
       .catch((error) => {
@@ -50,6 +51,9 @@ export default class EditMarksheet extends Component {
       .put("https://manraj-ors-1.onrender.com/marksheet/" + this.pid, this.state)
       .then((response) => {
         console.log("response", response);
+        if (response.status === 200 ) {
+          this.setState({ msg: "Data sucessfully updated!!" })
+        }
       })
       .catch((error) => {
         console.log("I am catch error : ");
@@ -60,64 +64,70 @@ export default class EditMarksheet extends Component {
   render() {
     return (
       <div className="form-div">
-      <h1 className='btn-adduser'>Edit College</h1>
+      <h1 className='btn-adduser'>Edit Marksheet</h1>
       <form className='form-post'>
 
-        <label htmlFor="collegeName">collegeName</label>
+        <label htmlFor="name">name</label>
         <input
           type="text"
-          placeholder="Enter your collegeName"
-          name="collegeName"
-          id="collegeName"
-          value={this.state.collegeName}
-          onChange={(e) => this.setState({ collegeName: e.target.value })}
+          placeholder="Enter your name"
+          name="name"
+          id="name"
+          value={this.state.name}
+          onChange={(e) => this.setState({ name: e.target.value })}
         />
-        <br />
 
-        <label htmlFor="address">address</label>
+        <label htmlFor="studentId">studentId</label>
         <input
           type="text"
-          placeholder="Enter your address"
-          name="address"
-          id="address"
-          value={this.state.address}
-          onChange={(e) => this.setState({ address: e.target.value })}
+          placeholder="Enter your studentId"
+          name="studentId"
+          id="studentId"
+          value={this.state.studentId}
+          onChange={(e) => this.setState({ studentId: e.target.value })}
         />
-        <br />
-        <label htmlFor="city">city </label>
+        
+        <label htmlFor="rollNo">rollNo</label>
         <input
           type="text"
-          placeholder="Enter your city"
-          name="city"
-          id="city"
-          value={this.state.city}
-          onChange={(e) => this.setState({ city: e.target.value })}
+          placeholder="Enter your rollNo"
+          name="rollNo"
+          id="rollNo"
+          value={this.state.rollNo}
+          onChange={(e) => this.setState({ rollNo: e.target.value })}
         />
-        <br />
+        <label htmlFor="physics">physics </label>
+        <input
+          type="text"
+          placeholder="Enter your physics"
+          name="physics"
+          id="physics"
+          value={this.state.physics}
+          onChange={(e) => this.setState({ physics: e.target.value })}
+        />
 
-        <label htmlFor="state">state</label>
+        <label htmlFor="chemistry">chemistry</label>
         <input
           type="text"
-          placeholder="Enter your state"
-          name="state"
-          id="state"
-          value={this.state.state}
-          onChange={(e) => this.setState({ state: e.target.value })}
+          placeholder="Enter your chemistry"
+          name="chemistry"
+          id="chemistry"
+          value={this.state.chemistry}
+          onChange={(e) => this.setState({ chemistry: e.target.value })}
         />
-        <br />
 
-        <label htmlFor="mobileNo">mobileNo </label>
+        <label htmlFor="maths">maths </label>
         <input
           type="number"
-          name="mobileNo"
-          id="mobileNo"
+          name="maths"
+          id="maths"
           // autoComplete="currentPassword"
-          value={this.state.mobileNo}
-          onChange={(e) => this.setState({ mobileNo: e.target.value })}
+          value={this.state.maths}
+          onChange={(e) => this.setState({ maths: e.target.value })}
         />
-        <br></br>
+        
         <button className='btn-submit'onClick={this.handleEdit}>Submit</button>
-        <br></br>
+        {!this.state.error && this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
         </form>
       </div>
     );

@@ -20,6 +20,7 @@ export default class CollegePost extends Component {
           "Handle submit",
           this.state.collegeName,
         );
+        
         axios
           .post("https://manraj-ors-1.onrender.com/college", this.state)
           .then((response) => {
@@ -33,8 +34,13 @@ export default class CollegePost extends Component {
             ) {
               this.setState({msg:"must not be empty"})
               this.setState({ error: true });
-            }else if (response.status === 200 ) {
-              
+            }else if (response.data.message   ==="Mobile number must be a 10-digit number"
+               ) {
+              this.setState({ message : "Mobile number must be a 10-digit number"})
+              this.setState({error:true})
+            }
+            else if (response.status === 200 ) {
+              this.setState({error:false})
               this.setState({ msg: "Data sucessfully updated!!" })
             }
           })
@@ -45,11 +51,24 @@ export default class CollegePost extends Component {
         let data = event.target.name;
         this.setState({ [data]: event.target.value });
       };
+      handleReset =(event)=>{
+        event.preventDefault();
+        this.setState({
+          collegeName: "",
+        address: "",
+        city: "",
+        state: "",
+        mobileNo: "",
+        msg: "",
+        })
+        console.log("reset")
+      }
     
       render() {
-        return (
+        return ( 
           <div className="form-div">
             <h1 className='btn-adduser'>Add College here</h1>
+            {this.state.error &&  <p style={{ color: "red" ,marginTop:"50px",position:"absolute"}}>{this.state.message}</p>}
             <form className='form-post'>
               <label htmlFor="collegeName"> College Name</label>
               <input
@@ -101,7 +120,7 @@ export default class CollegePost extends Component {
                 // onChange={(event) => this.setState({ roleId: event.target.value })}
                 onChange={this.nameFun}
               />
-              {this.state.error && !this.state.state && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}&#128077;</p>}
+              {this.state.error && !this.state.state && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
 
               
               
@@ -118,8 +137,10 @@ export default class CollegePost extends Component {
                 onChange={this.nameFun}
               />
                {this.state.error && !this.state.mobileNo && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-               
-              <button className='btn-submit' onClick={this.handleSubmit}>Submit</button><br></br>
+               <div>
+              <button className='btn-submit' onClick={this.handleSubmit}>Submit</button>
+              <button className='btn-submit' onClick={this.handleReset}>Reset</button>
+              </div>
               {!this.state.error && this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
               
             </form>

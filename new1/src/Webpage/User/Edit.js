@@ -108,7 +108,7 @@ export default class Edit extends Component {
         <label htmlFor="pass">Password</label>
         <input
           type="password"
-          name="password"
+          name="password" 
           id="pass"
           // autoComplete="currentPassword"
           value={this.state.password}

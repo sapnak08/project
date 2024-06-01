@@ -93,6 +93,19 @@ export default class UserPost1 extends Component {
     this.setState({ [data]: event.target.value });
   };
 
+  handleReset =(event)=>{
+    event.preventDefault();
+    this.setState({
+      firstName: "",
+      loginId: "",
+      lastName: "",
+      roleId: "",
+      password: "",
+      msg: "",
+      error: false,
+    })
+    console.log("reset")
+  }
   render() {
     return (
       <div className="form-div">
@@ -164,10 +177,10 @@ export default class UserPost1 extends Component {
             onChange={this.nameFun}
           />
          {this.state.error && !this.state.password && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          
-          <button className="btn-submit" onClick={this.handleSubmit}>
-            Submit
-          </button>
+          <div>
+          <button className="btn-submit" onClick={this.handleSubmit}>Submit</button>
+          <button className='btn-submit' onClick={this.handleReset}>Reset</button>
+          </div>
          {!this.state.error && this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
         </form>
       </div>

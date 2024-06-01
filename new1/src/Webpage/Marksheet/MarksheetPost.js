@@ -36,6 +36,10 @@ export default class MarksheetPost extends Component {
             ) {
               this.setState({msg:"must not be empty"})
               this.setState({ error: true });
+            }else if(response.data.message === "StudentId / roll number alredy exist"){
+              this.setState({message :"StudentId / roll number alredy exist"})
+              this.setState({error:true})
+    
             }else if (response.status === 200 ) {
               
               this.setState({ msg: "Data sucessfully updated!!" })
@@ -48,11 +52,26 @@ export default class MarksheetPost extends Component {
         let data = event.target.name;
         this.setState({ [data]: event.target.value });
       };
+      handleReset =(event)=>{
+        event.preventDefault();
+        this.setState({
+          name: '',
+            studentId: '',
+            rollNo: '',
+            physics: '',
+            chemistry: '',
+            maths: '',
+            msg: '',
+            error: false
+        })
+        console.log("reset")
+      }
     
       render() {
         return (
           <div className="form-div">
             <h1 className='btn-adduser'>Add Mark here</h1>
+            {this.state.error &&  <p style={{ color: "red" ,margin:"0"}}>{this.state.message}</p>}
             <form className='form-post'>
               <label htmlFor="name"> Student Name</label>
               <input
@@ -133,8 +152,10 @@ export default class MarksheetPost extends Component {
                 onChange={this.nameFun}
               />
                {this.state.error && !this.state.maths && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-               
-              <button className='btn-submit' onClick={this.handleSubmit}>Submit</button><br></br>
+               <div>
+              <button className='btn-submit' onClick={this.handleSubmit}>Submit</button>
+              <button className='btn-submit' onClick={this.handleReset}>Reset</button>
+              </div>
               {!this.state.error && this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
               
             </form>

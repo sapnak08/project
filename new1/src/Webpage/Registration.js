@@ -51,10 +51,11 @@ export default class Registration extends Component {
         }
         else if (response.status === 200 ) {
         this.setState({ msg: "Data sucessfully updated" })
-          window.location.pathname ="/login";
+        this.setState({ error: false });
+        window.location.pathname ="/login";
         }
         
-      })
+      }) 
   };  
   render() {
     return (
@@ -127,9 +128,9 @@ export default class Registration extends Component {
           <button className="btn-submit" onClick={this.handleSubmit}> Submit </button>
           <button className='btn-submit' onClick={this.handleReset}>Reset</button>
           </div>
-          {!this.state.error && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
+          {!this.state.error &&this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
          
-        </form>
+        </form> 
 
       </div>
     )

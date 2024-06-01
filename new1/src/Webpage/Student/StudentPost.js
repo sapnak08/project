@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class StudentPost extends Component {
   constructor() {
@@ -11,7 +11,7 @@ export default class StudentPost extends Component {
       emailId: "",
       collegeId: "",
       mobileNo: "",
-      msg: ""
+      msg: "",
     };
   }
   handleSubmit = (event) => {
@@ -31,26 +31,46 @@ export default class StudentPost extends Component {
           !this.state.collegeId ||
           !this.state.mobileNo
         ) {
-          this.setState({msg:"must not be empty"})
+          this.setState({ msg: "must not be empty" });
           this.setState({ error: true });
-        }else if (response.status === 200 ) {
-          
-          this.setState({ msg: "Data sucessfully updated!!" })
+        } else if (
+          response.data === "Mobile number must be a 10-digit number"
+        ) {
+          this.setState({ data: "Mobile number must be a 10-digit number" });
+          this.setState({ error: true });
+        } else if (response.status === 200) {
+          this.setState({ msg: "Data sucessfully updated!!" });
+          this.setState({ error: false });
         }
-      })
-  };  
+      });
+  };
   nameFun = (event) => {
     console.log("first", event.target.value);
     let data = event.target.name;
     this.setState({ [data]: event.target.value });
   };
 
+  handleReset =(event)=>{
+    event.preventDefault();
+    this.setState({
+      firstName: "",
+      lastName: "",
+      emailId: "",
+      collegeId: "",
+      mobileNo: "",
+      msg: "",
+      data:""
+    })
+    console.log("reset")
+  }
+
   render() {
     return (
-      <div className="form-div" >
-        <h1 className='btn-adduser'>Add Student here</h1>
-         <form className='form-post'>
-        <label htmlFor="firstname">Name</label>
+      <div className="form-div">
+        <h1 className="btn-adduser">Add Student here</h1>
+        {this.state.error && <p style={{ color: "red" ,marginTop:"50px",position:"absolute"}}>{this.state.data}</p>}
+        <form className="form-post">
+          <label htmlFor="firstname">Name</label>
           <input
             type="text"
             placeholder="Enter your name"
@@ -60,8 +80,10 @@ export default class StudentPost extends Component {
             // onChange={(event)=>this.setState({firstname : event.target.value})}
             onChange={this.nameFun}
           />
-          {this.state.error && !this.state.firstName && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          
+          {this.state.error && !this.state.firstName && (
+            <p style={{ color: "red", margin: "0" }}>{this.state.msg}</p>
+          )}
+
           <label htmlFor="lastName">Last name</label>
           <input
             type="text"
@@ -74,8 +96,10 @@ export default class StudentPost extends Component {
             // }
             onChange={this.nameFun}
           />
-          {this.state.error && !this.state.lastName && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          
+          {this.state.error && !this.state.lastName && (
+            <p style={{ color: "red", margin: "0" }}>{this.state.msg}</p>
+          )}
+
           <label htmlFor="emailId">emailId</label>
           <input
             type="text"
@@ -86,8 +110,10 @@ export default class StudentPost extends Component {
             // onChange={(event) => this.setState({ loginId: event.target.value })}
             onChange={this.nameFun}
           />
-          {this.state.error && !this.state.emailId && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          
+          {this.state.error && !this.state.emailId && (
+            <p style={{ color: "red", margin: "0" }}>{this.state.msg}</p>
+          )}
+
           <label htmlFor="collegeId">collegeId</label>
           <input
             type="text"
@@ -98,8 +124,10 @@ export default class StudentPost extends Component {
             // onChange={(event) => this.setState({ roleId: event.target.value })}
             onChange={this.nameFun}
           />
-          {this.state.error && !this.state.collegeId && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          
+          {this.state.error && !this.state.collegeId && (
+            <p style={{ color: "red", margin: "0" }}>{this.state.msg}</p>
+          )}
+
           <label htmlFor="mobileNo">mobileNo </label>
           <input
             type="mobileNo"
@@ -112,9 +140,18 @@ export default class StudentPost extends Component {
             // }
             onChange={this.nameFun}
           />
-          {this.state.error && !this.state.mobileNo && <p style={{ color: "red" ,margin:"0"}}>{this.state.msg}</p>}
-          <button className='btn-submit' onClick={this.handleSubmit}>Submit</button>
-          {!this.state.error && this.state.msg && <p style={{ color: "red",margin:"0" }}>{this.state.msg}&#128077;</p>}
+          {this.state.error && !this.state.mobileNo && (
+            <p style={{ color: "red", margin: "0" }}>{this.state.msg}</p>
+          )}
+          <div>
+          <button className="btn-submit" onClick={this.handleSubmit}>Submit</button>
+          <button className='btn-submit' onClick={this.handleReset}>Reset</button>
+          </div>
+          {!this.state.error && this.state.msg && (
+            <p style={{ color: "red", margin: "0" }}>
+              {this.state.msg}&#128077;
+            </p>
+          )}
         </form>
       </div>
     );

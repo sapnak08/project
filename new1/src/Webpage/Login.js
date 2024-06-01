@@ -42,7 +42,7 @@ export default class Login extends Component {
           } else {
             localStorage.setItem("user", JSON.stringify(response.data));
             this.setState({msg:"",error:false})
-            window.location.pathname ="/home"
+            window.location.pathname ="/"
           }
       })
   };

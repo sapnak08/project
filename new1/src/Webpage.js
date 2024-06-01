@@ -2,6 +2,8 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Home from "./Webpage/Home"
 import Marksheet from './Webpage/Marksheet'
 import "./Webpage/nav.css"
+// import "./Webpage/navbar.css"
+// import "./Webpage/dashboard.css"
 import UserGet from './Webpage/User/UserGet';
 import UserPost1 from './Webpage/User/UserPost1';
 import CollegePost from './Webpage/College/CollegePost';
@@ -20,6 +22,9 @@ import Login from './Webpage/Login';
 import Registration from './Webpage/Registration';
 import MarksheetGet from './Webpage/Marksheet/MarksheetGet';
 import MarksheetPost from './Webpage/Marksheet/MarksheetPost';
+import EditMarksheet from './Webpage/Marksheet/EditMarksheet';
+// import Navbar1 from './Webpage/Navbar1';
+// import Dashboard from "./Webpage/Dashboard"
 
 export default function Webpage(){
   const[theme,setTheme]=useState("light")
@@ -29,21 +34,25 @@ export default function Webpage(){
         <BrowserRouter >
         {/* <h1>Web page</h1> */}
         
-         <Navbar theme={theme} setTheme={setTheme}/>  
+         <Navbar theme={theme} setTheme={setTheme}/>
+         
+         {/* <Navbar1 theme={theme} setTheme={setTheme}/> */}
+
           <Routes> 
             
-            <Route path="/home" element={<Home />}/>
+            <Route path="/" element={<Home />}/>
             <Route path="/Userget" element={<UserGet/>}/>
             <Route path="/Userpost1" element={<UserPost1/>}/>
             <Route path="/edit/:id" element={<Edit/>}/>
 
             <Route path="/Collegeget" element={<Collegeget/>}/>
-            <Route path="/Collegelist" element={<CollegePost/>}/>
+            <Route path="/Collegepost" element={<CollegePost/>}/>
             <Route path="/editcollege/:id" element={<EditCollege/>}/>
             
             <Route path="/Marksheet" element={<Marksheet/>}/>
             <Route path="/Marksheetget" element={<MarksheetGet/>}/>
             <Route path="/Marksheetpost" element={<MarksheetPost/>}/>
+            <Route path="/editmarksheet/:id" element={<EditMarksheet/>}/>
 
             <Route path="/Roleget" element={<RoleGet/>}/>
             <Route path="/Rolepost" element={<RolePost/>}/>
